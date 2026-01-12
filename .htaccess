@@ -1,0 +1,29 @@
+# File: .htaccess
+
+# Apache 2.4 syntax
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(config.*\.php|app_init\.php)$">
+    Require all denied
+  </FilesMatch>
+  <FilesMatch "^(\.env.*|composer\.(json|lock)|.*\.(sql|bak|inc|ini))$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# Chỉ chặn test.php (KHÔNG chặn api.php)
+<Files "test.php">
+  Require ip 127.0.0.1 ::1
+</Files>
+
+# Force HTTPS (nếu có SSL)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
