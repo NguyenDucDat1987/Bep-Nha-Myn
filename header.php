@@ -20,7 +20,7 @@ $bodyClass = isset($GLOBALS['view_bodyClass']) ? $GLOBALS['view_bodyClass'] : ''
     <title><?= htmlspecialchars($title) ?></title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css?v=18.0" rel="stylesheet">
+    <link href="assets/css/style.css?v=17.0" rel="stylesheet">
 </head>
 
 <body class="<?= htmlspecialchars($bodyClass) ?>">

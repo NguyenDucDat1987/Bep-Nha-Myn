@@ -180,70 +180,72 @@ foreach ($weekMenu as $item) {
     <script>window.addEventListener('load', function () { if (typeof triggerFireworks === 'function') triggerFireworks(); });</script>
 
 <?php endif; ?>
-<?php require_once 'footer.php'; ?>
+<! -- bắt đầu đoạn popup -->
+    <?php if ($isGuest): ?>
+        <div class="modal fade" id="guestPopup" tabindex="-1" aria-labelledby="guestPopupLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
+                    <div class="modal-header text-white"
+                        style="background: linear-gradient(135deg, var(--k-primary), #E64A19);">
+                        <h5 class="modal-title fw-bold" id="guestPopupLabel">
+                            <i class="fas fa-bullhorn me-2"></i> Lời ngỏ từ Bếp Nhà Myn
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
 
-<!-- Guest Banner (Floating Widget) -->
-<?php if ($isGuest): ?>
-    <div id="guestBanner" class="guest-banner">
-        <div class="guest-banner-header">
-            <h6 class="m-0 fw-bold"><i class="fas fa-bullhorn me-2"></i>Lời ngỏ từ Bếp Myn</h6>
-            <button type="button" class="btn-close btn-close-white" onclick="toggleGuestBanner(false)"
-                aria-label="Minimize"></button>
-        </div>
-        <div class="guest-banner-content">
-            <h6 class="fw-bold mb-3" style="color: var(--k-text);">
-                "Hôm nay ăn gì?" <br> Câu hỏi khó nhất thế giới! 🤯
-            </h6>
+                    <div class="modal-body p-4 text-center">
+                        <h5 class="fw-bold mb-3" style="color: var(--k-text);">
+                            "Hôm nay ăn gì?" <br> Câu hỏi khó nhất thế giới! 🤯
+                        </h5>
 
-            <p class="text-muted small">
-                Xuất phát từ việc "nóc nhà" 🏠 của mình ngày nào cũng xoắn não nghĩ món ăn, mình đã tạo ra chiếc web này để
-                phó mặc cho nhân phẩm.
-            </p>
+                        <p class="text-muted text-start">
+                            Xuất phát từ việc "nóc nhà" 🏠 của mình ngày nào cũng xoắn não nghĩ món ăn, mình đã tạo ra chiếc
+                            web này để phó mặc cho nhân phẩm.
+                        </p>
 
-            <div class="alert alert-warning border-0 small shadow-sm p-3 mb-3"
-                style="background-color: #FFF8E1; color: #5D4037;">
-                <i class="fas fa-star text-warning me-1"></i> Để trải nghiệm xịn nhất, bạn hãy <b>Đăng ký / Đăng nhập</b>
-                nhé.
+                        <div class="alert alert-warning border-0 small shadow-sm text-start"
+                            style="background-color: #FFF8E1; color: #5D4037;">
+                            <i class="fas fa-star text-warning me-1"></i> Để trải nghiệm xịn nhất, bạn hãy <b>Đăng ký / Đăng
+                                nhập</b> nhé. Lúc đó bạn sẽ được tự quản lý danh sách món ăn yêu thích của riêng mình thay
+                            vì dùng danh sách mặc định.
+                        </div>
+
+                        <p class="small text-muted fst-italic mb-4 text-start">
+                            * Web vẫn đang hoàn thiện, nếu thấy lỗi gì hãy nhắn mình để mình fix ngay. Cảm ơn bạn đã ghé
+                            thăm!
+                        </p>
+
+                        <div class="d-grid gap-2">
+                            <a href="register.php" class="btn btn-primary-action text-white">
+                                <i class="fas fa-user-plus me-2"></i> ĐĂNG KÝ THÀNH VIÊN
+                            </a>
+                            <a href="login.php" class="btn btn-light border fw-bold" style="color: var(--k-text);">
+                                <i class="fas fa-sign-in-alt me-2"></i> ĐĂNG NHẬP
+                            </a>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-link text-muted text-decoration-none btn-sm"
+                                data-bs-dismiss="modal" style="font-size: 0.85rem;">
+                                Mình chỉ muốn xem thử thôi
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="d-grid gap-2">
-                <a href="register.php" class="btn btn-sm btn-primary-action text-white">
-                    <i class="fas fa-user-plus me-2"></i> ĐĂNG KÝ NGAY
-                </a>
-                <a href="login.php" class="btn btn-sm btn-light border fw-bold" style="color: var(--k-text);">
-                    <i class="fas fa-sign-in-alt me-2"></i> ĐĂNG NHẬP
-                </a>
-            </div>
         </div>
-    </div>
 
-    <div id="guestBannerToggle" class="guest-banner-toggle" onclick="toggleGuestBanner(true)" title="Xem lời ngỏ">
-        <i class="fas fa-comment-dots"></i>
-        <span
-            class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
-    </div>
-
-    <script>
-        function toggleGuestBanner(show) {
-            const banner = document.getElementById('guestBanner');
-            const toggle = document.getElementById('guestBannerToggle');
-
-            if (show) {
-                banner.classList.remove('minimized');
-                toggle.classList.remove('visible');
-                sessionStorage.setItem('guestBannerMinimized', 'false');
-            } else {
-                banner.classList.add('minimized');
-                toggle.classList.add('visible');
-                sessionStorage.setItem('guestBannerMinimized', 'true');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check session or default to open
-            if (sessionStorage.getItem('guestBannerMinimized') === 'true') {
-                toggleGuestBanner(false);
-            }
-        });
-    </script>
-<?php endif; ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Chỉ hiện Popup 1 lần duy nhất trong phiên làm việc
+                if (!sessionStorage.getItem('popupShown')) {
+                    var myModal = new bootstrap.Modal(document.getElementById('guestPopup'));
+                    myModal.show();
+                    sessionStorage.setItem('popupShown', 'true');
+                }
+            });
+        </script>
+    <?php endif; ?>
+    <! -- kết thúc đoạn popup -->
+        <?php require_once 'footer.php'; ?>
